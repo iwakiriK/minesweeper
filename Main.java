@@ -22,7 +22,7 @@ public class Main extends Frame implements WindowListener, MineSweeperGUI {
 
     public Main() {
         super("MineSweeper");
-        ms = new MineSweeper(9, 9, 10); // size: 9x9 , bomb: 10
+        ms = new MineSweeper(16, 30, 99); // depth, width, num of bombs
         init();
     }
 
@@ -74,6 +74,44 @@ public class Main extends Frame implements WindowListener, MineSweeperGUI {
     @Override
     public void setTextToTile(int x, int y, String text) {
         this.tileTable[y][x].setLabel(text);
+	// 数字の場合
+	if (!(text.equals("F") || text.equals("") || text.equals("B"))) {
+	    this.tileTable[y][x].setBackground(Color.GRAY);
+	    // 数字に応じて文字の色を変える
+	    switch (text) {
+	    case "1":
+		this.tileTable[y][x].setForeground(Color.CYAN);
+		break;
+	    case "2":
+		this.tileTable[y][x].setForeground(Color.GREEN);
+		break;
+	    case "3":
+		this.tileTable[y][x].setForeground(Color.MAGENTA);
+		break;
+	    case "4":
+		this.tileTable[y][x].setForeground(Color.BLUE);
+		break;
+	    case "5":
+		this.tileTable[y][x].setForeground(Color.RED);
+		break;
+	    case "6":
+		this.tileTable[y][x].setForeground(Color.ORANGE);
+		break;
+	    case "7":
+		this.tileTable[y][x].setForeground(Color.PINK);
+		break;
+	    case "8":
+		this.tileTable[y][x].setForeground(Color.LIGHT_GRAY);
+		break;
+	    }
+	    
+	} else if (text.equals("F")) { // フラッグ
+	    this.tileTable[y][x].setForeground(Color.YELLOW);
+	} else if (text.equals("")) {  // 何もない
+	    this.tileTable[y][x].setBackground(Color.LIGHT_GRAY);
+	} else if (text.equals("B")) { // 爆弾
+	    this.tileTable[y][x].setBackground(Color.RED);
+	}
     }
 
     @Override
@@ -112,6 +150,7 @@ class MouseEventHandler implements MouseListener {
         } break;
         case MouseEvent.BUTTON2: {
             // マウスの真ん中のボタンが押された時
+	    ms.openTileWithHint(msgui);
         } break;
         case MouseEvent.BUTTON3: {
             // マウスの右ボタンが押された時
@@ -137,8 +176,8 @@ class MouseEventHandler implements MouseListener {
 
 class ResultDialog extends Dialog {
 
-    Label label;
-    Button btn;
+    Label label, label2;
+    Button btn, btn2, btn3, btn4;
 
     public ResultDialog(Frame owner, String title) {
         super(owner, title);
@@ -167,6 +206,31 @@ class ResultDialog extends Dialog {
         Panel p2 = new Panel();
         p2.add(btn);
         this.add(p2);
+
+	Panel p3 = new Panel();
+        label2 = new Label();
+        p3.add(label2);
+        this.add(p3);
+        btn2 = new Button();
+        btn2.setLabel("continue");
+        btn2.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+		new Main();
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+            });
+        Panel p4 = new Panel();
+        p4.add(btn2);
+        this.add(p4);
+	
     }
 
     public void showDialog(String message) {
