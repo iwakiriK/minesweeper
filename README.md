@@ -1,17 +1,14 @@
 # minesweeper
 
-javaで作成したマインスイーパです。
+javaで作成したマインスイーパです。実行する為にはjavaをコンパイル・実行できる環境が必要です。
 
-実行する為にはjavaをコンパイル・実行できる開発環境が必要です。
-
-Main.javaの
-ms = new MineSweeper(9, 9, 10)の数字の部分が、サイズと爆弾の数を意味するので、そこを変えると難易度を変えることができます。
+Main.javaの25行目の数字を変えると、サイズや爆弾の数を変えることができます。
 
 # 使用方法
 
-1.2つのjavaファイルをダウンロードします
-1.javac Main.java Minesweeper.java等のコマンドでコンパイルします
-1.java Mainで実行します
+1. 2つのjavaファイルをダウンロードします
+1. javac Main.java Minesweeper.java等のコマンドでコンパイルします
+1. java Mainで実行します
 
 # 操作方法
 左クリック：マスを開けます

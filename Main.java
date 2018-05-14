@@ -22,7 +22,7 @@ public class Main extends Frame implements WindowListener, MineSweeperGUI {
 
     public Main() {
         super("MineSweeper");
-        ms = new MineSweeper(16, 30, 99); // depth, width, num of bombs
+        ms = new MineSweeper(16, 16, 40); // depth, width, num of bombs
         init();
     }
 
